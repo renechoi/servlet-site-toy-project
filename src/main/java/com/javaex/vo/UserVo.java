@@ -12,12 +12,8 @@ public class UserVo {
 	}
 
 	public UserVo(String name, String email, String password, String gender) {
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.gender = gender;
+		this(0, name, email, password, gender);
 	}
-
 
 	public UserVo(int no, String name, String email, String password, String gender) {
 		this.no = no;
