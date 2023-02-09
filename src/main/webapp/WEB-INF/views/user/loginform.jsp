@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/user.css" rel="stylesheet" type="text/css">
 <title>Mysite</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
 			<div id="content">
 				<div id="user">
 					
-					<form id="login-form" name="loginform" method="get" action="/mysite/user">
+					<form id="login-form" name="loginform" method="get" action="/user">
 						<input type="hidden" name="a" value="login" />
 						
 						<label class="block-label" for="email">이메일</label> 

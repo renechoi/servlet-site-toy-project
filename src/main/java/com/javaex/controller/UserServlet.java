@@ -115,13 +115,13 @@ public class UserServlet extends HttpServlet {
 			
 			if(vo==null) {
 				System.out.println("실패");
-				response.sendRedirect("/mysite/user?a=loginform&result=fail");
+				response.sendRedirect("/user?a=loginform&result=fail");
 			} else {
 				System.out.println("성공");
 				HttpSession session = request.getSession(true);
 				session.setAttribute("authUser", vo);
 				
-				response.sendRedirect("/mysite/main");
+				response.sendRedirect("/main");
 				return;
 			}
 			
@@ -129,11 +129,11 @@ public class UserServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("authUser");
 			session.invalidate();
-			response.sendRedirect("/mysite/main");
+			response.sendRedirect("/main");
 			
 		} else {
 			
-			WebUtil.redirect(request, response, "/mysite/main");
+			WebUtil.redirect(request, response, "/main");
 			/*response.sendRedirect("/mysite/main");*/
 		}
 	

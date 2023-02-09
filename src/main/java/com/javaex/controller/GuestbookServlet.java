@@ -35,7 +35,7 @@ public class GuestbookServlet extends HttpServlet {
 			GuestbookVo vo = new GuestbookVo(name, password, content);
 			dao.insert(vo);
 
-			response.sendRedirect("/mysite/gb");
+			response.sendRedirect("/gb");
 
 		} else if ("deleteform".equals(actionName)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/deleteform.jsp");
@@ -52,7 +52,7 @@ public class GuestbookServlet extends HttpServlet {
 			GuestbookDao dao = new GuestbookDaoImpl();
 			dao.delete(vo);
 
-			response.sendRedirect("/mysite/gb");
+			response.sendRedirect("/gb");
 		} else {
 			GuestbookDao dao = new GuestbookDaoImpl();
 			List<GuestbookVo> list = dao.getList();

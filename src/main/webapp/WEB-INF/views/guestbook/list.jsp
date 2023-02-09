@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/mysite/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 <title>Mysite</title>
 </head>
 <body>
@@ -45,7 +45,7 @@
 										<td>[${vo.no }]</td>
 										<td>${vo.name }</td>
 										<td>${vo.regDate }</td>
-										<td><a href="/mysite/gb?a=deleteform&no=${vo.no }">삭제</a></td>
+										<td><a href="/gb?a=deleteform&no=${vo.no }">삭제</a></td>
 									</tr>
 									<tr>
 										<td colspan=4>

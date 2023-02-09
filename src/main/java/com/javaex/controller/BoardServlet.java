@@ -67,14 +67,14 @@ public class BoardServlet extends HttpServlet {
 			
 			dao.update(vo);
 			
-			WebUtil.redirect(request, response, "/mysite/board?a=list");
+			WebUtil.redirect(request, response, "/board?a=list");
 		} else if ("writeform".equals(actionName)) {
 			// 로그인 여부체크
 			UserVo authUser = getAuthUser(request);
 			if (authUser != null) { // 로그인했으면 작성페이지로
 				WebUtil.forward(request, response, "/WEB-INF/views/board/writeform.jsp");
 			} else { // 로그인 안했으면 리스트로
-				WebUtil.redirect(request, response, "/mysite/board?a=list");
+				WebUtil.redirect(request, response, "/board?a=list");
 			}
 
 		} else if ("write".equals(actionName)) {
@@ -92,7 +92,7 @@ public class BoardServlet extends HttpServlet {
 			BoardDao dao = new BoardDaoImpl();
 			dao.insert(vo);
 
-			WebUtil.redirect(request, response, "/mysite/board?a=list");
+			WebUtil.redirect(request, response, "/board?a=list");
 
 		} else if ("delete".equals(actionName)) {
 			int no = Integer.parseInt(request.getParameter("no"));
@@ -100,10 +100,10 @@ public class BoardServlet extends HttpServlet {
 			BoardDao dao = new BoardDaoImpl();
 			dao.delete(no);
 
-			WebUtil.redirect(request, response, "/mysite/board?a=list");
+			WebUtil.redirect(request, response, "/board?a=list");
 
 		} else {
-			WebUtil.redirect(request, response, "/mysite/board?a=list");
+			WebUtil.redirect(request, response, "/board?a=list");
 		}
 	}
 

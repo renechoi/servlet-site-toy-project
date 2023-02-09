@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/mysite/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/board.css" rel="stylesheet" type="text/css">
 <title>Mysite</title>
 </head>
 <body>
@@ -32,13 +32,13 @@
 					<c:forEach items="${list }" var="vo">
 						<tr>
 							<td>${vo.no }</td>
-							<td><a href="/mysite/board?a=read&no=${vo.no }">${vo.title }</a></td>
+							<td><a href="/board?a=read&no=${vo.no }">${vo.title }</a></td>
 							<td>${vo.userName }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.regDate }</td>
 							<td>
 								<c:if test="${authUser.no == vo.userNo }">
-									<a href="/mysite/board?a=delete&no=${vo.no }" class="del">삭제</a>
+									<a href="/board?a=delete&no=${vo.no }" class="del">삭제</a>
 								</c:if>
 							</td>
 						</tr>
@@ -62,7 +62,7 @@
 				</div>				
 				<c:if test="${authUser != null }">
 					<div class="bottom">
-						<a href="/mysite/board?a=writeform" id="new-book">글쓰기</a>
+						<a href="/board?a=writeform" id="new-book">글쓰기</a>
 					</div>
 				</c:if>				
 			</div>

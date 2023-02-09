@@ -14,17 +14,13 @@ public class BoardVo {
 	}
 	
 	public BoardVo(int no, String title, String content) {
-		this.no = no;		
-		this.title = title;
-		this.content = content;
+		this(no, title, content, 0, "none", 0, "none");
 	}
 
 	public BoardVo(String title, String content, int userNo) {
-		this.title = title;
-		this.content = content;
-		this.userNo = userNo;
+		this(0, title, content, 0, "none", userNo, "none");
 	}
-	
+
 	public BoardVo(int no, String title, int hit, String regDate, int userNo, String userName) {
 		this.no = no;
 		this.title = title;
@@ -33,7 +29,7 @@ public class BoardVo {
 		this.userNo = userNo;
 		this.userName = userName;
 	}
-	
+
 	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo, String userName) {
 		this(no, title, hit, regDate, userNo, userName);
 		this.content = content;

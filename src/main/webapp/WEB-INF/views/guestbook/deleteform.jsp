@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/mysite/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 <title>Mysite</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
 			<div id="content">
 				<div id="guestbook" class="delete-form">
 					
-					<form method="post" action="/mysite/gb">
+					<form method="post" action="/gb">
 						<input type="hidden" name="no" value="${param.no }">
 						<input type="hidden" name="a" value="delete">
 					
@@ -27,7 +27,7 @@
 						<input type="submit" value="확인">
 						
 					</form>
-					<a href="/mysite/gb">방명록 리스트</a>
+					<a href="/gb">방명록 리스트</a>
 					
 				</div>
 			</div><!-- /content -->

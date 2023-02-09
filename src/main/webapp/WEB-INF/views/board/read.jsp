@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/mysite/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/board.css" rel="stylesheet" type="text/css">
 <title>Mysite</title>
 </head>
 <body>
@@ -36,10 +36,10 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="/mysite/board">글목록</a>
+					<a href="/board">글목록</a>
 					
 					<c:if test="${authUser.no == boardVo.userNo }">
-						<a href="/mysite/board?a=modifyform&no=${boardVo.no }">글수정</a>
+						<a href="/board?a=modifyform&no=${boardVo.no }">글수정</a>
 					</c:if>
 				</div>
 			</div>
