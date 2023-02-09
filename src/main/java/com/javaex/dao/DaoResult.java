@@ -15,14 +15,19 @@ public class DaoResult {
         this.message = parseResult(message);
     }
 
-
     public void setResult(String valueName, Object value){
         resultValue.put(valueName, value);
     }
 
     private String parseResult(int message) {
-        return message == 1 ? "success" : "fail";
+        return message == -1 ? "fail" : "success";
     }
 
+    public String getMessage() {
+        return message;
+    }
 
+    public Map<String, Object> getResultValue() {
+        return resultValue;
+    }
 }

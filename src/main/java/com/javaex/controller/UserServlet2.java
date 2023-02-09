@@ -1,17 +1,16 @@
 package com.javaex.controller;
 
-import java.io.IOException;
+import com.javaex.dao.UserDao;
+import com.javaex.util.WebUtil;
+import com.javaex.vo.UserVo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.javaex.dao.UserDao;
-import com.javaex.dao.UserDaoImpl;
-import com.javaex.util.WebUtil;
-import com.javaex.vo.UserVo;
+import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/user2")
 public class UserServlet2 extends HttpServlet {
@@ -42,8 +41,12 @@ public class UserServlet2 extends HttpServlet {
             String gender = request.getParameter("gender");
             UserVo vo = new UserVo(name, email, password, gender);
 
-            UserDao dao = new UserDaoImpl();
-            dao.insert(vo);
+            UserDao userDao = new UserDao();
+            try {
+                userDao.insert(vo);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
             WebUtil.forward(request, response, "/WEB-INF/views/user/joinsuccess.jsp");
         } else if ("loginform".equals(actionName)) {

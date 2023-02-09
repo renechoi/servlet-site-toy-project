@@ -2,7 +2,7 @@ package com.javaex.vo;
 
 public class UserVo {
 
-	private int no;
+	private int userNumber;
 	private String name;
 	private String email;
 	private String password;
@@ -11,24 +11,28 @@ public class UserVo {
 	public UserVo() {
 	}
 
+	public UserVo(int userNumber) {
+		this(userNumber, "none", "none", "none", "none");
+	}
+
 	public UserVo(String name, String email, String password, String gender) {
 		this(0, name, email, password, gender);
 	}
 
-	public UserVo(int no, String name, String email, String password, String gender) {
-		this.no = no;
+	public UserVo(int userNumber, String name, String email, String password, String gender) {
+		this.userNumber = userNumber;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.gender = gender;
 	}
 
-	public int getNo() {
-		return no;
+	public int getUserNumber() {
+		return userNumber;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setUserNumber(int userNumber) {
+		this.userNumber = userNumber;
 	}
 
 	public String getName() {
@@ -65,7 +69,7 @@ public class UserVo {
 
 	@Override
 	public String toString() {
-		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
+		return "UserVo [no=" + userNumber + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
 				+ gender + "]";
 	}
 

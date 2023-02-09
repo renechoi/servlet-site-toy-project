@@ -83,7 +83,7 @@ public class BoardServlet extends HttpServlet {
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			
-			int userNo = authUser.getNo();
+			int userNo = authUser.getUserNumber();
 			System.out.println("userNo : ["+userNo+"]");
 			System.out.println("title : ["+title+"]");
 			System.out.println("content : ["+content+"]");
