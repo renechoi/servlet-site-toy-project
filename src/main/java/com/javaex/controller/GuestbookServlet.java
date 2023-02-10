@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.GuestbookDao;
-import com.javaex.dao.GuestbookDaoImpl;
 import com.javaex.vo.GuestbookVo;
 
 @WebServlet("/gb")
@@ -31,9 +31,13 @@ public class GuestbookServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			String content = request.getParameter("content");
 
-			GuestbookDao dao = new GuestbookDaoImpl();
+			GuestbookDao dao = new GuestbookDao();
 			GuestbookVo vo = new GuestbookVo(name, password, content);
-			dao.insert(vo);
+			try {
+				dao.insert(vo);
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
 
 			response.sendRedirect("/gb");
 
@@ -49,13 +53,22 @@ public class GuestbookServlet extends HttpServlet {
 			vo.setNo(no);
 			vo.setPassword(password);
 
-			GuestbookDao dao = new GuestbookDaoImpl();
-			dao.delete(vo);
+			GuestbookDao dao = new GuestbookDao();
+			try {
+				dao.delete(vo);
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
 
 			response.sendRedirect("/gb");
 		} else {
-			GuestbookDao dao = new GuestbookDaoImpl();
-			List<GuestbookVo> list = dao.getList();
+			GuestbookDao guestbookDao = new GuestbookDao();
+			List<GuestbookVo> list = null;
+			try {
+				list = (List<GuestbookVo>) guestbookDao.readBy("All", new GuestbookVo()).getResultValue();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
 
 			request.setAttribute("list", list);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp");

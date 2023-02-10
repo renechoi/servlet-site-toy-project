@@ -1,12 +1,109 @@
 package com.javaex.dao;
 
-import java.util.List;
+import com.javaex.jdbc.JdbcTemplate;
 import com.javaex.vo.BoardVo;
 
-public interface BoardDao {
-	public List<BoardVo> getList();  // 게시물 전체 목록 조회
-	public BoardVo getBoard(int no); // 게시물 상세 조회
-	public int insert(BoardVo vo);   // 게시물 등록
-	public int delete(int no);       // 게시물 삭제
-	public int update(BoardVo vo);   // 게시물 수정
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BoardDao implements Dao<BoardVo> {
+
+    public static final JdbcTemplate JDBC_TEMPLATE = JdbcTemplate.getInstance();
+
+    private enum SqlQueries {
+        INSERT("insert into board values (seq_board_no.nextval, ?, ?, 0, sysdate, ?)"),
+        UPDATE("update board set title = ?, content = ? where no = ?"),
+        READ_BY_EACH("select b.no, b.title, b.content, b.hit, b.reg_date, b.user_no, u.name from board b, users u where b.user_no = u.no and b.no = ?"),
+        READ_BY_ALL("select b.no, b.title, b.hit, b.reg_date, b.user_no, u.name from board b, users u where b.user_no = u.no order by no desc"),
+        DELETE("delete from board where no = ?");
+
+        private final String query;
+
+        SqlQueries(String query) {
+            this.query = query;
+        }
+    }
+
+    @Override
+    public DaoResult insert(BoardVo boardVo) throws SQLException {
+        int result = JDBC_TEMPLATE.executeInsert(BoardDao.SqlQueries.INSERT.query, preparedStatement -> {
+            preparedStatement.setString(1, boardVo.getTitle());
+            preparedStatement.setString(2, boardVo.getContent());
+            preparedStatement.setInt(3, boardVo.getUserNo());
+        });
+        JDBC_TEMPLATE.close();
+        return new DaoResult(result);
+    }
+
+    @Override
+    public DaoResult readBy(String condition, BoardVo boardVo) throws SQLException {
+        if (condition.equals("All")) {
+            return readByAll(boardVo);
+        }
+        return readByEach(boardVo);
+    }
+
+    private DaoResult readByAll(BoardVo boardVo) throws SQLException {
+        List<BoardVo> boardVos = new ArrayList<>();
+        ResultSet resultSet = JDBC_TEMPLATE.executeQuery(BoardDao.SqlQueries.READ_BY_EACH.query);
+
+        while (resultSet.next()) {
+            BoardVo vo = new BoardVo(resultSet.getInt("no"),
+                    resultSet.getString("title"),
+                    resultSet.getInt("hit"),
+                    resultSet.getString("reg_date"),
+                    resultSet.getInt("user_no"),
+                    resultSet.getString("name"));
+            boardVos.add(vo);
+        }
+
+        boolean resultExist = resultSet.next();
+        DaoResult daoResult = new DaoResult("success");
+        daoResult.setResult("BoardVos", boardVos);
+
+        JDBC_TEMPLATE.close();
+        return daoResult;
+    }
+
+    private DaoResult readByEach(BoardVo boardVo) throws SQLException {
+        int no = boardVo.getNo();
+        ResultSet resultSet = JDBC_TEMPLATE.executeQuery(BoardDao.SqlQueries.READ_BY_EACH.query,
+                preparedStatement -> preparedStatement.setInt(1, no));
+
+        boolean resultExist = resultSet.next();
+        DaoResult daoResult = new DaoResult("success");
+        daoResult.setResult("userVo", new BoardVo(
+                no,
+                resultSet.getString("title"),
+                resultSet.getString("content"),
+                resultSet.getInt("hit"),
+                resultSet.getString("reg_date"),
+                resultSet.getInt("user_no"),
+                resultSet.getString("name")));
+
+        return daoResult;
+    }
+    
+    @Override
+    public DaoResult update(BoardVo boardVo) throws SQLException {
+        int result = JDBC_TEMPLATE.executeUpdate(SqlQueries.UPDATE.query, preparedStatement -> {
+            preparedStatement.setString(1, boardVo.getTitle());
+            preparedStatement.setString(2, boardVo.getContent());
+            preparedStatement.setInt(3, boardVo.getNo());
+        });
+
+        JDBC_TEMPLATE.close();
+        return new DaoResult(result);
+    }
+
+    @Override
+    public DaoResult delete(BoardVo boardVo) throws SQLException {
+        int result = JDBC_TEMPLATE.executeUpdate(BoardDao.SqlQueries.DELETE.query, preparedStatement -> {
+            preparedStatement.setInt(1, boardVo.getNo());
+        });
+        JDBC_TEMPLATE.close();
+        return new DaoResult(result);
+    }
 }

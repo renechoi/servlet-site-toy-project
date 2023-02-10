@@ -46,8 +46,16 @@ public class JdbcTemplate {
     public ResultSet executeQuery(String sqlQuery, PreparedStatementSetter preparedStatementSetter) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
         preparedStatementSetter.setPreparedStatement(preparedStatement);
-
         return preparedStatement.executeQuery();
     }
+
+
+    public void close() throws SQLException {
+        if (connection!=null){
+            connection.close();
+        }
+    }
+
+
 }
 

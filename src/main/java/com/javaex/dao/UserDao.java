@@ -34,6 +34,7 @@ public class UserDao implements Dao<UserVo> {
             preparedStatement.setString(3, userVo.getPassword());
             preparedStatement.setString(4, userVo.getGender());
         });
+        JDBC_TEMPLATE.close();
         return new DaoResult(result);
     }
 
@@ -98,6 +99,7 @@ public class UserDao implements Dao<UserVo> {
             preparedStatement.setString(3, userVo.getGender());
             preparedStatement.setInt(4, userVo.getUserNumber());
         });
+        JDBC_TEMPLATE.close();
         return new DaoResult(result);
     }
 
