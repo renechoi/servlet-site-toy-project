@@ -14,10 +14,18 @@ public class UserVo {
 	public UserVo(int userNumber) {
 		this(userNumber, "none", "none", "none", "none");
 	}
+	public UserVo(String email, String password) {
+		this(0, "none", email, password, "none");
+	}
+
+	public UserVo(String name, String password, String gender) {
+		this(0, name, "none", password,gender);
+	}
 
 	public UserVo(String name, String email, String password, String gender) {
 		this(0, name, email, password, gender);
 	}
+
 
 	public UserVo(int userNumber, String name, String email, String password, String gender) {
 		this.userNumber = userNumber;
@@ -26,6 +34,9 @@ public class UserVo {
 		this.password = password;
 		this.gender = gender;
 	}
+
+
+
 
 	public int getUserNumber() {
 		return userNumber;

@@ -110,8 +110,9 @@ public class UserDao implements Dao<UserVo> {
     }
 
 
-    public String idCheck(String email) throws SQLException {
-        return getCountByEmail(email) == 1 ? "true" : "false";
+    public DaoResult idCheck(String email) throws SQLException {
+        String result = getCountByEmail(email) == 1 ? "true" : "false";
+    return new DaoResult(result);
     }
 
     private int getCountByEmail(String email) throws SQLException {

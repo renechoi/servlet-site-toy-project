@@ -16,6 +16,15 @@ public class MySiteView {
         this.viewPath = viewPath;
     }
 
+    public static MySiteView of(String viewName){
+        String viewPath = createPath(viewName);
+        return new MySiteView(viewPath);
+    }
+
+    private static String createPath(String viewName){
+        return "/WEB-INF/user/" + viewName + ".jsp";
+    }
+
     public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         modelToRequestAttribute(model, request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(viewPath);
@@ -24,7 +33,6 @@ public class MySiteView {
     //
     private static void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        model.forEach( (key, value) -> session.setAttribute(key, value));
-//        checkModelInside(model);
+        model.forEach(session::setAttribute);
     }
 }

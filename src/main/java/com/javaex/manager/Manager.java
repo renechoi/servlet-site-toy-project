@@ -1,4 +1,4 @@
 package com.javaex.manager;
 
-public interface Manager {
+public interface Manager<T> {
 }
