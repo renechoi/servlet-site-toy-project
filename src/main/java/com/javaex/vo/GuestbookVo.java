@@ -15,6 +15,10 @@ public class GuestbookVo {
 		this(0, name, password, content, "none");
 	}
 
+	public GuestbookVo(int no, String password) {
+		this(no,"none",password,"none","none");
+	}
+
 	public GuestbookVo(int no, String name, String password, String content, String regDate) {
 		this.no = no;
 		this.name = name;
@@ -22,6 +26,8 @@ public class GuestbookVo {
 		this.content = content;
 		this.regDate = regDate;
 	}
+
+
 
 	public int getNo() {
 		return no;

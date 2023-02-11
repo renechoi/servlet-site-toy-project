@@ -1,7 +1,8 @@
-package com.javaex.controller.UserController;
+package com.javaex.controller.froncontroller;
 
 import com.javaex.controller.Controller;
 import com.javaex.controller.ModelView;
+import com.javaex.controller.usercontroller.*;
 import com.javaex.manager.UserManager;
 import com.javaex.util.WebUtil;
 import com.javaex.view.MySiteView;
@@ -24,12 +25,12 @@ public class UserFrontController extends HttpServlet {
     public UserFrontController() {
 
         controllerMap.put("/user/joinform", new JoinFormController());
-        controllerMap.put("/user/modifyform", new ModifyFormController());
+        controllerMap.put("/user/modifyform", new UserModifyFormController());
         controllerMap.put("/user/loginform", new LoginFormController());
 
         controllerMap.put("/user/join", new JoinController());
         controllerMap.put("/user/idcheck", new IdCheckController());
-        controllerMap.put("/user/modify", new ModifyController());
+        controllerMap.put("/user/modify", new UserModifyController());
         controllerMap.put("/user/login", new LoginController());
         controllerMap.put("/user/logout", new LogoutController());
 

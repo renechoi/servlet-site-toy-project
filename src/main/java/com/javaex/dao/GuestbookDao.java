@@ -11,7 +11,6 @@ import java.util.List;
 public class GuestbookDao implements Dao<GuestbookVo> {
 
 
-
     public static final JdbcTemplate JDBC_TEMPLATE = JdbcTemplate.getInstance();
 
     private enum SqlQueries {

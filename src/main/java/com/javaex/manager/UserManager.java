@@ -6,7 +6,7 @@ import com.javaex.vo.UserVo;
 
 import java.sql.SQLException;
 
-public class UserManager implements Manager<UserManager>{
+public class UserManager implements Manager{
 
     private final UserDao USER_DAO = new UserDao();
 

@@ -12,6 +12,10 @@ public class BoardVo {
 
 	public BoardVo() {
 	}
+
+	public BoardVo(int no) {
+		this(no, "none", "none", 0,"none", 0,"none");
+	}
 	
 	public BoardVo(int no, String title, String content) {
 		this(no, title, content, 0, "none", 0, "none");
@@ -34,6 +38,8 @@ public class BoardVo {
 		this(no, title, hit, regDate, userNo, userName);
 		this.content = content;
 	}
+
+
 
 	public int getNo() {
 		return no;

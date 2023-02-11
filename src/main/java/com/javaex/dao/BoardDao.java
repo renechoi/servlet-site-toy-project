@@ -40,12 +40,12 @@ public class BoardDao implements Dao<BoardVo> {
     @Override
     public DaoResult readBy(String condition, BoardVo boardVo) throws SQLException {
         if (condition.equals("All")) {
-            return readByAll(boardVo);
+            return readByAll();
         }
         return readByEach(boardVo);
     }
 
-    private DaoResult readByAll(BoardVo boardVo) throws SQLException {
+    private DaoResult readByAll() throws SQLException {
         List<BoardVo> boardVos = new ArrayList<>();
         ResultSet resultSet = JDBC_TEMPLATE.executeQuery(BoardDao.SqlQueries.READ_BY_EACH.query);
 
@@ -74,7 +74,7 @@ public class BoardDao implements Dao<BoardVo> {
 
         boolean resultExist = resultSet.next();
         DaoResult daoResult = new DaoResult("success");
-        daoResult.setResult("userVo", new BoardVo(
+        daoResult.setResult("boardVo", new BoardVo(
                 no,
                 resultSet.getString("title"),
                 resultSet.getString("content"),

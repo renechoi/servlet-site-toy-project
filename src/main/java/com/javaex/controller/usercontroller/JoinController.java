@@ -1,4 +1,4 @@
-package com.javaex.controller.UserController;
+package com.javaex.controller.usercontroller;
 
 import com.javaex.controller.Controller;
 import com.javaex.controller.ModelView;
